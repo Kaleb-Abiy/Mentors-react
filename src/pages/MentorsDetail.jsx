@@ -17,7 +17,7 @@ function MentorsDetail() {
         setIsModalOpen(true);
     };
     const handleOk = () => {
-        setIsModalOpen(false);
+        setIsModalOpen(false);                                                
     };
     const handleCancel = () => {
         setIsModalOpen(false);
@@ -39,6 +39,7 @@ function MentorsDetail() {
               </Space>
               <Space>
                   <h1>availabilities</h1>
+                  if dates is less than today show message that says the mentor doesnt updated his avaibilities
               </Space>
 
               <Space>
@@ -49,7 +50,7 @@ function MentorsDetail() {
           </Space>
     </MainLayout>
     
-    <Modal title="Basic Modal" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
+    <Modal title="Select Date and Time for appointment" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
         <Book />
       </Modal>
     </>

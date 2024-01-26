@@ -10,6 +10,7 @@ import {
 import Login from './pages/Login.jsx';
 import MentorsList from './pages/MentorsList.jsx';
 import MentorsDetail from './pages/MentorsDetail.jsx';
+import UserProfile from './pages/UserProfile.jsx';
 
 
 const router = createBrowserRouter([
@@ -35,6 +36,11 @@ const router = createBrowserRouter([
   {
     path: "/mentors-detail",
     element: <MentorsDetail />,
+  },
+
+  {
+    path: "/user-profile",
+    element: <UserProfile />,
   },
 ]);
 
