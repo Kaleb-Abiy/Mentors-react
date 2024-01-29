@@ -1,5 +1,8 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { Button, Checkbox, Form, Input, Flex, Card, Radio } from 'antd';
+import { useDispatch, useSelector } from 'react-redux';
+import { register } from '../redux/reducers/userSlice';
+import { useNavigate } from 'react-router-dom';
 
 
 const cardStyle = {
@@ -13,15 +16,53 @@ const imgStyle = {
 
 
 
-const onFinish = (values) => {
-    console.log('Success:', values);
-};
-
-const onFinishFailed = (errorInfo) => {
-    console.log('Failed:', errorInfo);
-};
 
 function Register() {
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const [confirmPassword, setConfirmPassword] = useState('')
+    const [userType, setUserType] = useState('')
+
+
+    const { access } = useSelector(state => state.user)
+
+    const navigate = useNavigate()
+
+    useEffect(() => {
+        if (access) {
+            navigate('/mentors')
+        }
+    }, [access])
+
+
+    const dispatch = useDispatch()
+
+    
+
+    const onFinish = (values) => {
+        fetch('https://web-production-b715.up.railway.app/auth/register', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(values)
+        })
+            .then(res => res.json())
+            .then(data => {
+                localStorage.setItem('access_token', data.access)
+                localStorage.setItem('refresh_token', data.refresh)
+                dispatch(register(data.access))
+            })
+            .catch(err => {
+                console.log(err)
+            }) 
+
+    };
+
+    const onFinishFailed = (errorInfo) => {
+        console.log('Failed:', errorInfo);
+    };
+
   return (
           <Card
               hoverable
@@ -68,7 +109,7 @@ function Register() {
                   >
                       <Form.Item
                           label="Email"
-                          name="Email"
+                          name="email"
                           rules={[
                               {
                                   required: true,
@@ -77,12 +118,12 @@ function Register() {
                               },
                           ]}
                       >
-                          <Input />
+                          <Input onChange={e => setEmail(e.target.value)} />
                       </Form.Item>
 
                       <Form.Item
                           label="Password"
-                          name="password"
+                          name="password1"
                           rules={[
                               {
                                   required: true,
@@ -90,7 +131,7 @@ function Register() {
                               },
                           ]}
                       >
-                          <Input.Password />
+                          <Input.Password onChange={e => setPassword(e.target.value)} />
                       </Form.Item>
 
                       <Form.Item
@@ -103,18 +144,18 @@ function Register() {
                               },
                           ]}
                       >
-                          <Input.Password />
+                          <Input.Password onChange={e => setConfirmPassword(e.target.value)}/>
                       </Form.Item>
 
 
                       <Form.Item
-                          name="type"
+                          name="role"
                           wrapperCol={{
                               offset: 8,
                               span: 16,
                           }}
                       >
-                          <Radio.Group name="radiogroup">
+                          <Radio.Group name="radiogroup" onChange={e => setUserType(e.target.value)}>
                               <Radio value="mentor">Mentor</Radio>
                               <Radio value="user">User</Radio>
                           </Radio.Group>

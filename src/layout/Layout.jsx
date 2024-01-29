@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { logout } from '../redux/reducers/userSlice';
+
 import {
     MenuFoldOutlined,
     MenuUnfoldOutlined,
@@ -7,14 +10,27 @@ import {
     VideoCameraOutlined,
 } from '@ant-design/icons';
 import { Layout, Menu, Button, theme } from 'antd';
+import { Link } from 'react-router-dom';
+import { useNavigate, Navigate } from 'react-router-dom';
+
+
 const { Header, Sider, Content } = Layout;
 
 
 const MainLayout = ({children}) => {
+    console.log(children)
     const [collapsed, setCollapsed] = useState(false);
     const {
         token: { colorBgContainer, borderRadiusLG },
     } = theme.useToken();
+    const dispatch = useDispatch();
+
+    const navigate = useNavigate()
+
+    const handleMentorsClick = ({item, key, keyPath, domEvent })=> {
+        console.log(item, key, keyPath, domEvent )
+    }
+    
     return (
         <>
         <Layout >
@@ -26,26 +42,31 @@ const MainLayout = ({children}) => {
                     defaultSelectedKeys={['1']}
                     items={[
                         {
-                            key: '1',
+                            key: '/mentors',
                             icon: <UserOutlined />,
-                            label: 'nav 1',
+                            label: (
+                                <Link to="/mentors">Mentors</Link>
+                            ),
                         },
                         {
                             key: '2',
                             icon: <VideoCameraOutlined />,
-                            label: 'nav 2',
+                            label: (
+                                <Link to="/appointments">Appointments</Link>),
                         },
                         {
                             key: '3',
                             icon: <UploadOutlined />,
-                            label: 'nav 3',
+                            label: (
+                                <Link to="/user-profile">Profile</Link>
+                            ),
                             
                         },
                     ]}
                    
                 />
                     <div style={{ position: 'absolute', bottom: 20, left: 0, right: 0, textAlign: 'center' }}>
-                        <Button type="primary" danger onClick={() => console.log('Logout')}>
+                        <Button type="primary" danger onClick={() => dispatch(logout())}>
                             Logout
                         </Button>
                     </div>

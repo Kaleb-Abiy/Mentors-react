@@ -11,6 +11,10 @@ import Login from './pages/Login.jsx';
 import MentorsList from './pages/MentorsList.jsx';
 import MentorsDetail from './pages/MentorsDetail.jsx';
 import UserProfile from './pages/UserProfile.jsx';
+import AppointmentList from './pages/AppointmentList.jsx';
+import PrivateRoutes from './utils/PrivateRoutes.jsx';
+import { Provider } from 'react-redux';
+import store  from './redux/store.js'
 
 
 const router = createBrowserRouter([
@@ -30,24 +34,31 @@ const router = createBrowserRouter([
 
   {
     path: "/mentors",
-    element: <MentorsList />,
+    element: <PrivateRoutes><MentorsList /></PrivateRoutes>,
   },
 
   {
     path: "/mentors-detail",
-    element: <MentorsDetail />,
+    element: <PrivateRoutes><MentorsDetail /></PrivateRoutes>,
   },
 
   {
     path: "/user-profile",
-    element: <UserProfile />,
+    element: <PrivateRoutes><UserProfile /></PrivateRoutes>,
+  },
+
+  {
+    path: "/appointments",
+    element: <PrivateRoutes><AppointmentList /></PrivateRoutes>,
   },
 ]);
 
 function App() {
   
   return (
-    <RouterProvider router={router} />
+    <Provider store={store}>
+      <RouterProvider router={router} />
+    </Provider>
   )
 }
 

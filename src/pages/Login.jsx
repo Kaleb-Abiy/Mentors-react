@@ -1,5 +1,8 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { Button, Checkbox, Form, Input, Flex, Card, Radio } from 'antd';
+import { useDispatch, useSelector } from 'react-redux';
+import { login } from '../redux/reducers/userSlice';
+import { useNavigate } from 'react-router-dom';
 
 
 const cardStyle = {
@@ -12,16 +15,43 @@ const imgStyle = {
 };
 
 
-
-const onFinish = (values) => {
-    console.log('Success:', values);
-};
-
-const onFinishFailed = (errorInfo) => {
-    console.log('Failed:', errorInfo);
-};
-
 function Login() {
+    const access_token = useSelector(state => state.user.access)
+
+    const navigate = useNavigate()
+
+    useEffect(() => {
+        console.log(access_token)
+        if (access_token) {
+            navigate('/mentors')
+        }
+        
+    }, [access_token])
+
+    const dispatch = useDispatch()
+
+    const onFinish = (values) => {
+        console.log('Success:', values);
+        fetch('https://web-production-b715.up.railway.app/auth/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(values)
+        })
+            .then(res => res.json())
+            .then(data => {
+                localStorage.setItem('access_token', data.access)
+                localStorage.setItem('refresh_token', data.refresh)
+                dispatch(login(data.access))
+            })
+            .catch(err => console.log(err))
+    };
+
+    const onFinishFailed = (errorInfo) => {
+        console.log('Failed:', errorInfo);
+    };
+
   return (
       <Card
           hoverable
@@ -68,7 +98,7 @@ function Login() {
                   >
                       <Form.Item
                           label="Email"
-                          name="Email"
+                          name="email"
                           rules={[
                               {
                                   required: true,
