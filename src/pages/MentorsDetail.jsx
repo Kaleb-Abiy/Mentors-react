@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import { UserOutlined } from '@ant-design/icons';
-import { Avatar, Space, Tag, Modal, Button } from 'antd';
+import { Avatar, Space, Tag, Modal, Button, Table } from 'antd';
 import MainLayout from '../layout/Layout'
 import Book from './Book';
 import { useLocation } from 'react-router-dom';
@@ -17,6 +17,8 @@ const handleBooking = (e) => {
 function MentorsDetail() {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [mentor, setMentor] = useState({})
+    const [availability, setAvailability] = useState([{}])
+    const [bookee, setBookee] = useState()
     const token = useSelector(state => state.user.access)
     const refresh = useSelector(state => state.user.refresh)
 
@@ -36,10 +38,56 @@ function MentorsDetail() {
 
     let {ment} = location.state
 
-    console.log(token)
 
-    useEffect(()=> {
-        fetch(`https://web-production-b715.up.railway.app/mentors/${ment[0].id}`,{
+    const availability_columns = [
+        {
+            title: 'Date',
+            dataIndex: 'date',
+        },
+        {
+            title: 'start_time',
+            dataIndex: 'start_time',
+        },
+        {
+            title: 'end_time',
+            dataIndex: 'end_time',
+        },
+    ];
+
+
+    const fecthMentor = () => {fetch(`https://web-production-b715.up.railway.app/mentors/${ment[0].id}`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'AUTHORIZATION': `Bearer ${token}`
+        },
+    })
+        .then(res => {
+            if (res.status === 401) {
+                fetch("https://web-production-b715.up.railway.app/auth/login/refresh/", {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ "refresh": refresh })
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        dispatch(login(data.access))
+                    })
+                    .catch(err => console.log(err))
+            } else {
+                res.json()
+                    .then(data => {
+                        setMentor(data)
+                    })
+                    .catch(err => console.log(err))
+            }
+        })
+        .catch(err => console.log(err))
+    }
+    const fectchAvailabilities = () => {
+        fetch(`https://web-production-b715.up.railway.app/mentors/show_availability/${ment[0].id}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -53,21 +101,28 @@ function MentorsDetail() {
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify({ "refresh": refresh })
+                    body: JSON.stringify({"refresh": refresh})
                 })
-                    .then(res => res.json())
-                    .then(data => {
-                        dispatch(login(data.access))
-             })
-             .catch(err => console.log(err))
+                .then(res=> res.json())
+                .then(data => {
+                    dispatch(login(data.access))
+                })
+                .catch(err => console.log(err))
             } else {
                 res.json()
-                .then(data => {
-                    setMentor(data)
+                .then(data=>{
+                    console.log(data)
+                    setAvailability(data)
                 })
                 .catch(err => console.log(err))
             }
         })
+    }
+
+
+    useEffect(()=> {
+       fecthMentor()
+       fectchAvailabilities()
     }, [token])
 
 
@@ -87,7 +142,7 @@ function MentorsDetail() {
               </Space>
               <Space>
                   <h1>availabilities</h1>
-                  if dates is less than today show message that says the mentor doesnt updated his avaibilities
+                  <Table columns={availability_columns} dataSource={availability.availability} />
               </Space>
 
               <Space>

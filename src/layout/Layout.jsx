@@ -37,6 +37,7 @@ const MainLayout = ({children}) => {
         <Layout>
             <Sider trigger={null} collapsible collapsed={collapsed}
             style={{
+                overflow:false,
                 position: 'fixed',
                 height: '100vh',
                 top: 0,
