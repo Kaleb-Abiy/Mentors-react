@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from 'react'
 import MainLayout from '../layout/Layout'
 import { EditOutlined, EllipsisOutlined, SettingOutlined } from '@ant-design/icons';
-import { Avatar, Button, Card, Flex } from 'antd';
+import { Avatar, Button, Card, Flex, Tag } from 'antd';
 import {  useSelector, useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { login } from '../redux/reducers/userSlice';
 
 const { Meta } = Card;
@@ -14,6 +14,10 @@ function MentorsList() {
     const refresh = useSelector(state => state.user.refresh)
 
     const dispatch = useDispatch()
+
+    const splitEmail = (email) => {
+        return email.split('@')[0]
+    }
 
     useEffect(()=> {
         fetch('https://web-production-b715.up.railway.app/mentors', {
@@ -55,19 +59,21 @@ function MentorsList() {
                 cover={
                     <img
                         alt="example"
-                        src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
+                        src="https://img.freepik.com/free-photo/3d-illustration-teenager-with-funny-face-glasses_1142-50955.jpg?t=st=1706694487~exp=1706698087~hmac=dea2b6b7d5d17d435e0f0442cca0c53a96ffb7905aefc161a1746316b432f56e&w=740"
                     />
                 }
                 actions={[
                     <Button type="primary">
-                        View Details
+                        <Link to="/mentors-detail" state={{ment: mentors.filter(m=> m.id === mentor.id)}}>View Details</Link>
                     </Button>
                 ]}
+                extra={mentor.fields.map(field => 
+                    <Tag color='green'>{field.name}</Tag>
+                    )}
             >
                 <Meta
-                    avatar={<Avatar src="https://api.dicebear.com/7.x/miniavs/svg?seed=8" />}
-                    title="Card title"
-                    description="This is the description"
+                    title={splitEmail(mentor.user)}
+                    description={mentor.hourly_rate}
                 />
             </Card>
         ))}

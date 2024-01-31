@@ -14,6 +14,7 @@ import { Link } from 'react-router-dom';
 import { useNavigate, Navigate } from 'react-router-dom';
 
 
+
 const { Header, Sider, Content } = Layout;
 
 
@@ -33,8 +34,17 @@ const MainLayout = ({children}) => {
     
     return (
         <>
-        <Layout >
-            <Sider trigger={null} collapsible collapsed={collapsed}>
+        <Layout>
+            <Sider trigger={null} collapsible collapsed={collapsed}
+            style={{
+                position: 'fixed',
+                height: '100vh',
+                top: 0,
+                bottom: 0,
+                left: 0,
+            }}
+            
+            >
                 <div className="demo-logo-vertical" />
                 <Menu
                     theme="dark"
@@ -75,6 +85,7 @@ const MainLayout = ({children}) => {
                 <Header
                     style={{
                         padding: 0,
+                        marginLeft: collapsed ? '5%': '15%',
                         background: colorBgContainer,
                     }}
                 >
@@ -91,9 +102,10 @@ const MainLayout = ({children}) => {
                 </Header>
                 <Content
                     style={{
-                        margin: '24px 16px',
+                        marginLeft: collapsed ? '5%': '15%',
                         padding: 24,
-                        minHeight: 435,
+                        height: '100vh',
+                        width: '100%',
                         background: colorBgContainer,
                         borderRadius: borderRadiusLG,
                     }}
