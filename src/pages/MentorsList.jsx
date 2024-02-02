@@ -15,9 +15,9 @@ function MentorsList() {
 
     const dispatch = useDispatch()
 
-    const splitEmail = (email) => {
-        return email.split('@')[0]
-    }
+    // const splitEmail = (email) => {
+    //     return email.split('@')[0]
+    // }
 
     useEffect(()=> {
         fetch('https://web-production-b715.up.railway.app/mentors', {
@@ -59,12 +59,12 @@ function MentorsList() {
                 cover={
                     <img
                         alt="example"
-                        src="https://img.freepik.com/free-photo/3d-illustration-teenager-with-funny-face-glasses_1142-50955.jpg?t=st=1706694487~exp=1706698087~hmac=dea2b6b7d5d17d435e0f0442cca0c53a96ffb7905aefc161a1746316b432f56e&w=740"
+                        src="../public/3d-illustration-teenager-with-funny-face-glasses.jpg"
                     />
                 }
                 actions={[
                     <Button type="primary">
-                        <Link to="/mentors-detail" state={{ment: mentors.filter(m=> m.id === mentor.id)}}>View Details</Link>
+                        <Link to="/mentors-detail" state={{ment: mentors.filter(m=> m.id === mentor.id), mentor_id: mentor.user.id}}>View Details</Link>
                     </Button>
                 ]}
                 extra={mentor.fields.map(field => 
@@ -72,7 +72,7 @@ function MentorsList() {
                     )}
             >
                 <Meta
-                    title={splitEmail(mentor.user)}
+                    title={mentor.user.email.split('@')[0]}
                     description={mentor.hourly_rate}
                 />
             </Card>

@@ -6,12 +6,13 @@ import { useNavigate } from 'react-router-dom';
 
 
 const cardStyle = {
-    width: 1350,
-    height: 600
+    width: '100%',
+    height: '100vh'
 };
 const imgStyle = {
     display: 'block',
-    width: 600,
+    width: '50%',
+    height: '100vh',
 };
 
 
@@ -73,10 +74,10 @@ function Register() {
               }}
           >
 
-          <Flex justify="space-between">
+          <Flex justify="space-between" wrap='flexWrap'>
               <img
                   alt="avatar"
-                  src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
+                  src="../public/consulting-advisory-assistance-suggestion-guidance-concept_53876-133712.jpg"
                   style={imgStyle}
               />
 
@@ -98,7 +99,9 @@ function Register() {
                           span: 16,
                       }}
                       style={{
-                          minWidth: 700
+                          minWidth: '100vh',
+                          maxWidth: '100vh',
+                          paddingRight: 82
                       }}
                       initialValues={{
                           remember: true,
@@ -168,7 +171,7 @@ function Register() {
                           }}
                       >
                           <Button type="primary" htmlType="submit">
-                              Submit
+                              Register
                           </Button>
                       </Form.Item>
                   </Form>

@@ -1,80 +1,98 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import { Space, Table, Tag } from 'antd';
 import MainLayout from '../layout/Layout';
+import { useSelector } from 'react-redux';
 
 const columns = [
+   
     {
-        title: 'Name',
-        dataIndex: 'name',
-        key: 'name',
-        render: (text) => <a>{text}</a>,
+        title: 'Mentor',
+        dataIndex: 'bookee',
+        key: 'bookee',
+        render: (text) => <a>{text}</a>
     },
     {
-        title: 'Age',
-        dataIndex: 'age',
-        key: 'age',
-    },
-    {
-        title: 'Address',
-        dataIndex: 'address',
-        key: 'address',
-    },
-    {
-        title: 'Tags',
-        key: 'tags',
-        dataIndex: 'tags',
-        render: (_, { tags }) => (
+        title: 'Date',
+        key: 'date',
+        render: (_, record) => (
             <>
-                {tags.map((tag) => {
-                    let color = tag.length > 5 ? 'geekblue' : 'green';
-                    if (tag === 'loser') {
-                        color = 'volcano';
-                    }
-                    return (
-                        <Tag color={color} key={tag}>
-                            {tag.toUpperCase()}
-                        </Tag>
-                    );
-                })}
+            <Space>
+            <a>Date</a>: {record.appointment_time.date}
+            </Space>
+            <br />
+            <Space>
+            <a>Start time</a>: {record.appointment_time.start_time}
+            </Space>
+            <br />
+            <Space>
+                <a>End time</a>: {record.appointment_time.end_time}
+            </Space>
+            
+            </>
+        )
+    },
+    {
+        title: 'Status',
+        key: 'status',
+        dataIndex: 'status',
+        render: (_, record ) => (
+            <>
+                
+                    <Tag color={record?.status ==='accepted' ? 'green' : 'red'} key={record?.status}>
+                        {record?.status.toUpperCase()}
+                    </Tag>
+                
             </>
         ),
     },
     {
-        title: 'Action',
-        key: 'action',
+        title: 'Meeting Link',
+        key: 'meeting_link',
         render: (_, record) => (
             <Space size="middle">
-                <a>Invite {record.name}</a>
-                <a>Delete</a>
+                <a href={record.meeting_link}>Meeting Link</a>
             </Space>
         ),
     },
 ];
-const data = [
-    {
-        key: '1',
-        name: 'John Brown',
-        age: 32,
-        address: 'New York No. 1 Lake Park',
-        tags: ['nice', 'developer'],
-    },
-    {
-        key: '2',
-        name: 'Jim Green',
-        age: 42,
-        address: 'London No. 1 Lake Park',
-        tags: ['loser'],
-    },
-    {
-        key: '3',
-        name: 'Joe Black',
-        age: 32,
-        address: 'Sydney No. 1 Lake Park',
-        tags: ['cool', 'teacher'],
-    },
-];
 
 function AppointmentList() {
+    const [data, setData] = useState([])
+    const token = useSelector(state => state.user.access)
+    const refresh = useSelector(state => state.user.refresh)
+
+  useEffect(() => {
+      fetch('https://web-production-b715.up.railway.app/mentors/appointment_list', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'AUTHORIZATION': `Bearer ${token}`
+        },
+      })
+      .then(res => {
+              console.log(res)
+              if (res.status === 401) {
+                  fetch("https://web-production-b715.up.railway.app/auth/login/refresh/", {
+                      method: 'POST',
+                      headers: {
+                          'Content-Type': 'application/json',
+                      },
+                      body: JSON.stringify({ "refresh": refresh })
+                  })
+                      .then(res => res.json())
+                      .then(data => {
+                          dispatch(login(data.access))
+                      })
+              } else {
+                  res.json()
+                      .then(data => {
+                          console.log(data)
+                          setData(data)
+                      })
+              }
+          })
+  }, [token])  
+
   return (
    <>
    <MainLayout>
