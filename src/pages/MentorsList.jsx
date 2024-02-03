@@ -59,7 +59,7 @@ function MentorsList() {
                 cover={
                     <img
                         alt="example"
-                        src="../../public/3d-illustration-teenager-with-funny-face-glasses.jpg"
+                        src="./3d-illustration-teenager-with-funny-face-glasses.jpg"
                     />
                 }
                 actions={[

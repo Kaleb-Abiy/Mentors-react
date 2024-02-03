@@ -57,25 +57,25 @@ function Landing() {
       <Carousel afterChange={onChange} autoplay>
         <div style={contentStyle}>
             <img 
-              src='../../public/mentoring-coaching-tutor-guiding-helping-concept_53876-128048.jpg'
+              src='./mentoring-coaching-tutor-guiding-helping-concept_53876-128048.jpg'
             style={{ width: '100%', height: '84vh', maxWidth: '100%' }}
             />
         </div>
         <div style={contentStyle}>
           <img
-            src='../../public/employees-giving-hands-helping-colleagues-walk-upstairs_74855-5236.jpg'
+            src='./employees-giving-hands-helping-colleagues-walk-upstairs_74855-5236.jpg'
             style={{ width: '100%', height: '84vh', maxWidth: '100%' }}
           />
         </div>
         <div style={contentStyle}>
           <img
-            src='../../public/coaching-coach-development-educating-guide-concept_53876-124792.jpg'
+            src='./coaching-coach-development-educating-guide-concept_53876-124792.jpg'
             style={{ width: '100%', height: '84vh', maxWidth: '100%' }}
           />
         </div>
         <div style={contentStyle}>
           <img
-            src='../../public/asian-businesspeople-talk-project-strategy-office-meeting-room_74952-2603.jpg'
+            src='./asian-businesspeople-talk-project-strategy-office-meeting-room_74952-2603.jpg'
             style={{ width: '100%', height: '82vh', maxWidth: '100%' }}
           />
         </div>
