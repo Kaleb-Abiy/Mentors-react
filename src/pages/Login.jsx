@@ -87,7 +87,7 @@ function Login() {
           <Flex justify="space-between">
               <img
                   alt="avatar"
-                  src="../public/consulting-advisory-assistance-suggestion-guidance-concept_53876-133712.jpg"
+                  src="./consulting-advisory-assistance-suggestion-guidance-concept_53876-133712.jpg"
                   style={imgStyle}
               />
 
