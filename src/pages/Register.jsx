@@ -1,8 +1,10 @@
 import React, {useState, useEffect} from 'react';
-import { Button, Checkbox, Form, Input, Flex, Card, Radio } from 'antd';
+import { Button, Checkbox, Form, Input, Flex, Card, Radio, Alert, Space } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { register } from '../redux/reducers/userSlice';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import './Register.css'
+
 
 
 const cardStyle = {
@@ -23,6 +25,7 @@ function Register() {
     const [password, setPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
     const [userType, setUserType] = useState('')
+    const [message, setMessage] = useState('')
 
 
     const { access } = useSelector(state => state.user)
@@ -48,23 +51,44 @@ function Register() {
             },
             body: JSON.stringify(values)
         })
-            .then(res => res.json())
-            .then(data => {
-                localStorage.setItem('access_token', data.access)
-                localStorage.setItem('refresh_token', data.refresh)
-                dispatch(register(data.access))
+            .then(res => {
+                if(res.status === 400) {
+                    res.json()
+                    .then(data => {
+                        setMessage('something went wrong, please try again')
+                    })
+                }
+                else {
+                    res.json()
+                    .then(data => {
+                        localStorage.setItem('access_token', data.access)
+                        localStorage.setItem('refresh_token', data.refresh)
+                        dispatch(register(data.access))
+                    })
+                    .catch(err => {
+                        console.log(err)
+                    }) 
+                }
             })
-            .catch(err => {
-                console.log(err)
-            }) 
+            
 
     };
 
     const onFinishFailed = (errorInfo) => {
         console.log('Failed:', errorInfo);
+        setMessage(errorInfo.errorFields[0].errors[0])
     };
 
   return (
+    <>
+    <Space
+              direction="vertical"
+              style={{
+                  width: '100%',
+              }}
+    >
+        {message && <Alert message={message} type="error" showIcon closable/>}
+    </Space>
           <Card
               hoverable
               style={cardStyle}
@@ -174,10 +198,16 @@ function Register() {
                               Register
                           </Button>
                       </Form.Item>
+                          <div className="login-text">
+                              Already have an account? <Link to="/login">Login</Link>
+                          </div>
                   </Form>
+                     
            </Flex>           
           </Flex>
-          </Card>  
+             
+          </Card> 
+          </> 
           
   )
 }

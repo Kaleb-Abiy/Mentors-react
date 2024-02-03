@@ -22,7 +22,7 @@ const range = (start, end) => {
 
 const disabledDate = (current) => {
     // Can not select days before today and today
-    return current && current < dayjs().endOf('day');
+    return current && current < dayjs();
 };
 
 const disabledDateTime = () => ({
@@ -56,6 +56,8 @@ function MentorsDetail() {
         const dateAndTime = string.split(' ')
         const selectedDate = dateAndTime[0]
         const selectedTime = dateAndTime[1]
+        console.log(selectedDate)
+        console.log(selectedTime)
         setAppointmentDate(selectedDate)
         setStartTime(selectedTime)
     }
@@ -70,9 +72,8 @@ function MentorsDetail() {
             body: JSON.stringify({
                 "bookee": mentor_id,
                 "appointment_time": {
-                    "date": "2024-02-01",
-                    "start": "10:03:09",
-                    "end": "10:03:11"
+                    "date": `${appointmentDate}`,
+                    "start": `${startTime}`,
                 },
             })
         })
@@ -243,7 +244,7 @@ function MentorsDetail() {
                       <DatePicker
                       format="YYYY-MM-DD HH:mm:ss"
                       disabledDate={disabledDate}
-                      disabledTime={disabledDateTime}
+                    //   disabledTime={disabledDateTime}
                       showTime={{
                           defaultValue: dayjs('00:00:00', 'HH:mm:ss'),
                           }}

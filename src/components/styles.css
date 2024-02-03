@@ -1,0 +1,23 @@
+/* styles.css */
+
+/* Existing styles remain the same */
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: grey;
+    /* Dark background color for the footer */
+    color: #fff;
+    /* Text color */
+    padding: 10px;
+    text-align: center;
+}
+
+.footer a {
+    color: #fff;
+    /* Link color */
+    margin: 0 10px;
+    text-decoration: none;
+}

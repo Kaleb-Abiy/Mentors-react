@@ -1,8 +1,10 @@
-import React, {useEffect} from 'react';
-import { Button, Checkbox, Form, Input, Flex, Card, Radio } from 'antd';
+import React, { useEffect, useState } from 'react';
+import { Button, Checkbox, Form, Input, Flex, Card, Radio, Alert, Space } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../redux/reducers/userSlice';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+
+
 
 const cardStyle = {
     width: '100%',
@@ -17,6 +19,7 @@ const imgStyle = {
 
 function Login() {
     const access_token = useSelector(state => state.user.access)
+    const [message, setMessage] = useState('')
 
     const navigate = useNavigate()
 
@@ -39,13 +42,23 @@ function Login() {
             },
             body: JSON.stringify(values)
         })
-            .then(res => res.json())
-            .then(data => {
-                localStorage.setItem('access_token', data.access)
-                localStorage.setItem('refresh_token', data.refresh)
-                dispatch(login(data.access))
+            .then(res => {
+                if (!res.ok) {
+                    res.json()
+                        .then(data => {
+                            setMessage(data.detail)
+                        })
+                } else {
+                    res.json()
+                    .then(data => {
+                        localStorage.setItem('access_token', data.access)
+                        localStorage.setItem('refresh_token', data.refresh)
+                        dispatch(login(data.access))
+                    })
+                    .catch(err => console.log(err))
+                }
             })
-            .catch(err => console.log(err))
+           
     };
 
     const onFinishFailed = (errorInfo) => {
@@ -53,6 +66,15 @@ function Login() {
     };
 
   return (
+<>
+       <Space
+              direction="vertical"
+              style={{
+                  width: '100%',
+              }}
+    >
+        {message && <Alert message={message} type="error" showIcon closable/>}
+    </Space>
       <Card
           hoverable
           style={cardStyle}
@@ -136,10 +158,14 @@ function Login() {
                               Submit
                           </Button>
                       </Form.Item>
+                          <div className="register-text">
+                             Dont't have an account? <Link to="/register">Register Here</Link>
+                          </div>
                   </Form>
               </Flex>
           </Flex>
       </Card>  
+      </>
   )
 }
 
