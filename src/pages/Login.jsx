@@ -73,7 +73,7 @@ function Login() {
                   width: '100%',
               }}
     >
-        {message && <Alert message={message} type="error" showIcon closable/>}
+        {message && <Alert message={message + " " + "maybe you account is not active please check your email and verify"} type="error" showIcon closable/>}
     </Space>
       <Card
           hoverable
