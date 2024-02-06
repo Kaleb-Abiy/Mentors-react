@@ -7,6 +7,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { login } from '../redux/reducers/userSlice';
 import dayjs from 'dayjs';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
+import './MentorsDetail.css'
 
 dayjs.extend(customParseFormat);
 const { RangePicker } = DatePicker;
@@ -212,28 +213,39 @@ function MentorsDetail() {
   return (
     <>
     <MainLayout>
-          <Space direction="vertical" size={16}>
+        <div className="details">
+
+       
+          
               <Space wrap size={16}>
                   <Avatar size={74} icon={<UserOutlined />} />
                   <h1>Name: {mentor.user?.email.split('@')[0]}</h1>
               </Space>
-              <Space>
+              
+              <div className='hourly_rate'>
                 <h1>Hourly Rate: {mentor.hourly_rate}$</h1>
-              </Space>
-              <Space>
-                  <h1>skills</h1>: {mentor.fields?.map(field => <Tag color="green">{field.name}</Tag>)}
-              </Space>
-              <Space>
-                  <h1>availabilities</h1>
-                  <Table columns={availability_columns} dataSource={availability.availability} />
-              </Space>
+              </div>
+              
+              
+                  
+                  <div className='skills'>
+                      <h1>skills</h1> {mentor.fields?.map(field => <span><Tag color="green">{field.name}</Tag></span>)}
+                  </div>
+                  
+             
+                  <h1 className='availabilities'>availabilities</h1>
+                  <div className='table'>
+                    <Table columns={availability_columns} dataSource={availability.availability} />
+                  </div>
+    
 
-              <Space>
+                <div className='book_button'>
                   <Button onClick={showModal} type="primary">
                       Book Now
                   </Button>
-              </Space>
-          </Space>
+                </div>
+         
+              </div>
     </MainLayout>
     
     <Modal title="Select Date and Time for appointment" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>

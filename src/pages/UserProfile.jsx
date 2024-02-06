@@ -5,6 +5,7 @@ import MainLayout from '../layout/Layout'
 import Book from './Book';
 import UpdateProfile from './UpdateProfile';
 import { UploadOutlined } from '@ant-design/icons';
+import './UserProfile.css'
 
 
 function UserProfile() {
@@ -43,11 +44,13 @@ function UserProfile() {
   return (
       <>
           <MainLayout>
+            <div className="container">
+
               <Space direction="vertical" size={16}>
                   {/* <Space wrap size={16}>
                       <Avatar size={74} icon={<UserOutlined />} />
                       <h1>Name: Kaleb Abiy</h1>
-                  </Space> */}
+                    </Space> */}
                   <Space>
                       <h1>Bio: No bio...</h1>
                   </Space>
@@ -58,6 +61,7 @@ function UserProfile() {
                       </Button>
                   </Space>
               </Space>
+                    </div>
           </MainLayout>
 
           <Modal title="Update Profile" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>

@@ -1,0 +1,14 @@
+.reg_text {
+    text-align: center;
+}
+
+.register-text {
+    text-align: center;
+}
+
+.card {
+    background-color: ghostwhite;
+        width: 80%;
+        margin: auto;
+        height: 90vh;
+}

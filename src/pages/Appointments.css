@@ -1,0 +1,13 @@
+.apps_table {
+    max-width: 100%;
+    overflow: auto;
+    
+}
+
+
+@media screen and (max-width : 600px) {
+    .apps_table {
+        max-width: fit-content;
+        margin-left: 150px;
+    }
+}

@@ -5,3 +5,26 @@
     /* Adjust the text color as needed */
 }
 
+.reg_text {
+    text-align: center;
+}
+
+.login-text {
+    text-align: center;
+}
+
+.card {
+    background-color: ghostwhite;
+    width:80%;
+    margin: auto;
+    height: 90vh;
+}
+
+/* @media only screen and (max-width: 700px) {
+    .card {
+        width: 100%;
+        display: flex;
+        justify-content: flex-start;
+    }
+} */
+

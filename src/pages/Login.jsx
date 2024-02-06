@@ -3,6 +3,7 @@ import { Button, Checkbox, Form, Input, Flex, Card, Radio, Alert, Space } from '
 import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../redux/reducers/userSlice';
 import { Link, useNavigate } from 'react-router-dom';
+import './Login.css'
 
 
 
@@ -76,30 +77,17 @@ function Login() {
         {message && <Alert message={`${message} verify your email to activate`} type="error" showIcon closable/>}
     </Space>
       <Card
+      className='card'
           hoverable
-          style={cardStyle}
+        //   style={cardStyle}
           bodyStyle={{
               padding: 0,
               overflow: 'hidden',
+              width: '80%',
+              margin: 'auto'
           }}
       >
-
-          <Flex justify="space-between">
-              <img
-                  alt="avatar"
-                  src="./consulting-advisory-assistance-suggestion-guidance-concept_53876-133712.jpg"
-                  style={imgStyle}
-              />
-
-              <Flex
-                  vertical
-                  align="flex-end"
-                  justify="space-between"
-                  style={{
-                      padding: 32,
-                  }}
-              >
-
+              <h1 className='reg_text'>Login Here</h1>
                   <Form
                       name="basic"
                       labelCol={{
@@ -109,8 +97,7 @@ function Login() {
                           span: 16,
                       }}
                       style={{
-                          minWidth: '100vh',
-                          maxWidth: '100vh',
+                    
                           paddingRight: 82
                       }}
                       initialValues={{
@@ -155,15 +142,14 @@ function Login() {
                           }}
                       >
                           <Button type="primary" htmlType="submit">
-                              Submit
+                              Login
                           </Button>
                       </Form.Item>
-                          <div className="register-text">
-                             Dont't have an account? <Link to="/register">Register Here</Link>
-                          </div>
+                          
                   </Form>
-              </Flex>
-          </Flex>
+              <div className="register-text">
+                  Dont't have an account? <Link to="/register">Register Here</Link>
+              </div>
       </Card>  
       </>
   )

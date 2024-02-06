@@ -103,10 +103,11 @@ const MainLayout = ({children}) => {
                 </Header>
                 <Content
                     style={{
-                        marginLeft: collapsed ? '5%': '15%',
+                        margin: 'auto',
+                        marginLeft: collapsed ? '5%' : '15%',
                         padding: 24,
-                        height: '100vh',
-                        width: '100%',
+                        // height: '50vh',
+                        width: '85%',
                         background: colorBgContainer,
                         borderRadius: borderRadiusLG,
                     }}

@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react'
 import { Space, Table, Tag } from 'antd';
 import MainLayout from '../layout/Layout';
 import { useSelector } from 'react-redux';
+import './Appointments.css'
 
 const columns = [
    
@@ -96,7 +97,9 @@ function AppointmentList() {
   return (
    <>
    <MainLayout>
+    <div className='apps_table'>
     <Table columns={columns} dataSource={data} />;
+    </div>
    </MainLayout>
    </>
   )

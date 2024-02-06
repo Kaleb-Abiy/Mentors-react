@@ -5,6 +5,7 @@ import { Avatar, Button, Card, Flex, Tag } from 'antd';
 import {  useSelector, useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { login } from '../redux/reducers/userSlice';
+import './MentorsList.css'
 
 const { Meta } = Card;
 
@@ -52,10 +53,13 @@ function MentorsList() {
 
   return (
     <MainLayout>
-        <Flex wrap='wrap' gap={50}>
+        <div className="list">
+
+       
               {!mentors || mentors.length === 0 ? <><h1>No mentors</h1></> : mentors.map(mentor => (
             <Card
-                style={{ width: 300 }}
+            className='card'
+                // style={{ maxWidth: 300 }}
                 cover={
                     <img
                         alt="example"
@@ -67,23 +71,25 @@ function MentorsList() {
                         <Link to="/mentors-detail" state={{ment: mentors.filter(m=> m.id === mentor.id), mentor_id: mentor.user.id}}>View Details</Link>
                     </Button>
                 ]}
+              
                 extra={mentor.fields.map(field => 
-                    <Tag color='green'>{field.name}</Tag>
+
+                   <div className='skill_tags'> <Tag color='green'>{field.name}</Tag></div>
                     )}
             >
                 <Meta
                     title={mentor.user.email.split('@')[0]}
-                    description={mentor.hourly_rate}
+                    description={`${mentor.hourly_rate}$`}
                 />
             </Card>
         ))}
            
        
-          
+          </div>
 
-           </Flex>
           
     </MainLayout>
+    
   )
 }
 

@@ -90,29 +90,17 @@ function Register() {
         {message && <Alert message={message} type="error" showIcon closable/>}
     </Space>
           <Card
+          className='card'
               hoverable
-              style={cardStyle}
+            //   style={cardStyle}
               bodyStyle={{
                   padding: 0,
                   overflow: 'hidden',
+                  width: '80%',
+                  margin: 'auto'
               }}
           >
-
-          <Flex justify="space-between" wrap='flexWrap'>
-              <img
-                  alt="avatar"
-                  src="./consulting-advisory-assistance-suggestion-guidance-concept_53876-133712.jpg"
-                  style={imgStyle}
-              />
-
-              <Flex
-                  vertical
-                  align="flex-end"
-                  justify="space-between"
-                  style={{
-                      padding: 32,
-                  }}
-              >
+              <h1 className='reg_text'>Register Here</h1>
              
                   <Form
                       name="basic"
@@ -123,8 +111,7 @@ function Register() {
                           span: 16,
                       }}
                       style={{
-                          minWidth: '100vh',
-                          maxWidth: '100vh',
+                
                           paddingRight: 82
                       }}
                       initialValues={{
@@ -198,14 +185,11 @@ function Register() {
                               Register
                           </Button>
                       </Form.Item>
-                          <div className="login-text">
-                              Already have an account? <Link to="/login">Login</Link>
-                          </div>
+                          
                   </Form>
-                     
-           </Flex>           
-          </Flex>
-             
+              <div className="login-text">
+                  Already have an account? <Link to="/login">Login</Link>
+              </div>
           </Card> 
           </> 
           
