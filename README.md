@@ -1,7 +1,8 @@
 # Mentorship Web app
 
-<img src = "./chrome-capture-2024-1-7.gif" />
+## Find the right mentor for you
 
+<img src = "./chrome-capture-2024-1-7.gif" />
 
 ## Technologies Used
 - React.js
