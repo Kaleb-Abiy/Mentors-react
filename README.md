@@ -23,22 +23,23 @@
 3. Run `npm run dev` to see the project live.
 
 ## Landing Page
-<img src = "./chrome-capture-2024-1-7.gif" />
+<img src = "https://raw.githubusercontent.com/Kaleb-Abiy/Mentors-react/main/public/chrome-capture-2024-1-7.gif?token=GHSAT0AAAAAACMRMKTEC4BXB4LIYNYMPH66ZODKGFA" />
 
 ## Signup Page
-<img src = "./chrome-capture-2024-1-7.gif" />
+<img src = "https://raw.githubusercontent.com/Kaleb-Abiy/Mentors-react/main/public/chrome-capture-2024-1-7%20(1).gif?token=GHSAT0AAAAAACMRMKTE6CLFGHP3XMVOEWIIZODKDZA" />
 
 ## Signin Page
-<img src = "./chrome-capture-2024-1-7.gif" />
+<img src = "https://raw.githubusercontent.com/Kaleb-Abiy/Mentors-react/main/public/chrome-capture-2024-1-7%20(2).gif?token=GHSAT0AAAAAACMRMKTFVMBM33H6PNF5SK74ZODKD7Q" />
 
 ## Mentors List Page
-<img src = "./chrome-capture-2024-1-7.gif" />
+<img src = "https://github.com/Kaleb-Abiy/Mentors-react/blob/main/public/chrome-capture-2024-1-7%20(3).gif?raw=true" />
 
 ## Mentors Detail Page
-<img src = "./chrome-capture-2024-1-7.gif" />
+<img src = "https://raw.githubusercontent.com/Kaleb-Abiy/Mentors-react/main/public/chrome-capture-2024-1-7%20(4).gif?token=GHSAT0AAAAAACMRMKTFC3WPZQWWM4CHIVLAZODKEWA" />
 
 ## Appointment List Page
-<img src = "./chrome-capture-2024-1-7.gif" />
+<img src = "![image](https://github.com/Kaleb-Abiy/Mentors-react/assets/65336151/59ec6702-fed6-4516-b291-af252e90d370)
+" />
 
 
 ## License
