@@ -39,8 +39,7 @@
 <img src = "https://raw.githubusercontent.com/Kaleb-Abiy/Mentors-react/main/public/chrome-capture-2024-1-7%20(4).gif?token=GHSAT0AAAAAACMRMKTFC3WPZQWWM4CHIVLAZODKEWA" />
 
 ## Appointment List Page
-<img src = "https://github.com/Kaleb-Abiy/Mentors-react/assets/65336151/59ec6702-fed6-4516-b291-af252e90d370
-" />
+<img src = "https://raw.githubusercontent.com/Kaleb-Abiy/Mentors-react/main/public/chrome-capture-2024-1-7%20(5).gif?token=GHSAT0AAAAAACMRMKTFUX5VKIEOL43AF5YWZODKHVA" />
 
 
 ## License
